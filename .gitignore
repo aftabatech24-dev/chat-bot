@@ -1,0 +1,16 @@
+# Python environments and bytecode
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Local chatbot data (contains private account and conversation information)
+chatbot.db
+chatbot.db-*
+bot_brain.brn
+
+# Common editor and operating-system files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
