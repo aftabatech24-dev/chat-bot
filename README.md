@@ -1,82 +1,86 @@
-# Python AIML Chatbot
+# Python Chatbot with Naive Bayes Intent Classification
 
-A small local desktop chatbot built with Python, AIML, scikit-learn, SQLite, and Tkinter. AIML handles known patterns, while a TF-IDF and Naive Bayes intent classifier responds to everyday messages that do not match a rule.
+A beginner-friendly command-line chatbot that learns to classify common conversation intents from a labelled JSON dataset. The classifier is implemented in Python using only the standard library.
 
 ## Features
 
-- Sign up and sign in with a username and password.
-- Store accounts, sessions, notes, preferences, and conversation history in a local SQLite database.
-- Use AIML patterns for greetings, casual exchanges, AI questions, identity questions, weather questions, and jokes.
-- Use a small intent classifier for greetings, wellbeing, moods, thanks, farewells, jokes, apologies, agreement, disagreement, compliments, and small talk.
-- Keep chat history visible with distinct user and bot message colors.
-- Reuse a compiled AIML brain on later launches for faster startup.
+- 13 conversation intents with 195 labelled example phrases.
+- A separate JSON file for training examples and prepared responses.
+- A supervised Multinomial Naive Bayes classifier with add-one (Laplace) smoothing.
+- Word and adjacent-word-pair features to help classify short messages.
+- A repeatable, stratified 80/20 train/test split.
+- A held-out evaluation score shown when the chatbot starts.
+- Confidence-based fallback for messages the classifier does not recognise.
+- No database, account setup, internet access, or third-party Python packages.
+
+## Project files
+
+    chat-bot/
+    ├── chatbot.py
+    ├── chatbot_data.json
+    ├── Chatbot_Project_Report.docx
+    ├── README.md
+    └── .gitignore
+
+The Python file loads and validates the dataset, creates a train/test split, evaluates a model trained on the training portion, and then fits the chatbot's final model on all available examples. The JSON file stores intent tags, phrases, and response choices. The Word report gives a more detailed project explanation and viva preparation.
 
 ## Requirements
 
-- Python 3.10 or newer.
-- Tkinter, included with many standard Python distributions. On Linux, install the distribution's Tkinter package if it is missing.
-- Packages listed in `requirements.txt`.
+- Python 3.8 or later
+- No pip installation is required
 
-The `aiml.py` package is imported by the application as `aiml`.
+## Run the chatbot
 
-## Install and Run
+Open this repository folder in VS Code, open its terminal, and run:
 
-Open a terminal in this project folder. On Windows, create a virtual environment, install dependencies into it, and start the app with that same environment:
+    py chatbot.py
 
-```powershell
-py -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -r requirements.txt
-.\.venv\Scripts\python.exe main.py
-```
+If your system uses python instead of the Windows py launcher, run:
 
-If the `py` launcher is unavailable, use the command for a Python 3.10+ interpreter installed on your machine. On macOS or Linux, use:
+    python chatbot.py
 
-```sh
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install -r requirements.txt
-python main.py
-```
+Keep chatbot.py and chatbot_data.json in the same folder. If Windows cannot find py or python, install Python and enable Add Python to PATH during setup.
 
-On first launch, select **Create a new account** and enter a username of 3–32 characters with no spaces and a password of at least 8 characters. Sign in with those credentials on later launches.
+## How the model works
 
-## Project Layout
+1. The JSON file supplies labelled example sentences for each intent.
+2. The program tokenizes each sentence and creates word and adjacent-word-pair features.
+3. The dataset is split separately within each intent. With the included data, 156 examples are used for training and 39 for testing. A fixed random seed makes this split repeatable.
+4. The Naive Bayes model learns class priors and feature frequencies from the 156 training examples. Laplace smoothing prevents zero probabilities for unseen features.
+5. The program checks the model on the 39 held-out examples. The current fixed split produces 66.7% accuracy (26 of 39).
+6. After evaluation, the chatbot is trained again on all 195 examples so its replies can use the full dataset.
 
-```text
-Chatbot/
-├── main.py                 # Application entry point, AIML setup, routing, and Tkinter UI
-├── database.py             # SQLite accounts, sessions, notes, preferences, and history
-├── ml_fallback.py          # Intent examples, TF-IDF/Naive Bayes classifier, and replies
-├── std-startup.xml         # AIML startup rule that loads basic_chat.aiml
-├── basic_chat.aiml         # Explicit conversational patterns and fallback marker
-├── requirements.txt        # Third-party Python packages
-├── README.md               # Setup and project guide
-├── PRD.md                  # Product requirements
-├── Architecture.md         # Application components and data flow
-├── Rules.md                # Development guidance
-├── Design.md               # Interface and color palette
-├── Memory.md               # Current implementation status and known limits
-└── Task.md                 # Setup and first-run checklist
-```
+The reported score belongs to this small, manually written dataset and this one train/test split. It should not be treated as a guarantee of performance on general conversations. The project uses a supervised intent classifier; it is not a large language model and it does not learn from live chats.
 
-`bot_brain.brn` and `chatbot.db` are generated beside the source files the first time the app runs. They are local runtime data and are excluded from version control.
+## Example conversation
 
-## How Conversation Routing Works
+    You: hello
+    Bot: Hi there! How can I help?
 
-1. `main.py` checks for the compiled AIML brain and attempts to load it.
-2. If the brain is missing or cannot be loaded, the kernel reads `std-startup.xml`, loads `basic_chat.aiml`, and saves a compiled brain when supported.
-3. The chat service checks AIML rules first. Its default AIML pattern marks unmatched messages for the ML fallback.
-4. `ml_fallback.py` compares the message against hand-authored training examples using TF-IDF, Naive Bayes probabilities, and cosine similarity. If scikit-learn cannot be imported, a pure-Python TF-IDF cosine fallback is used.
-5. Each signed-in user's conversation turns are stored in SQLite and restored in the chat log at sign-in.
+    You: what is AI?
+    Bot: Artificial intelligence (AI) is the field of making computers perform tasks
+    that usually need human intelligence, such as understanding language or recognising patterns.
 
-## Extending the Chatbot
+    You: quantum flibbertigibbet
+    Bot: I'm not confident about that message yet. Could you say it another way?
 
-- Add exact phrase rules and scripted replies to `basic_chat.aiml`.
-- Add varied example phrases and a response intent to `ml_fallback.py` for conversational wording that may take many forms.
-- Keep the AIML files beside `main.py`; the startup rule loads `basic_chat.aiml` by its filename.
+    You: exit
+    Bot: Goodbye! Thanks for chatting.
 
-The classifier uses a small fixed corpus. It does not train itself from saved conversation history. Weather replies do not use a live weather service, and the app may not understand wording outside its rules and examples.
+Replies may vary because some intents have more than one prepared response.
+
+## Add or edit training examples
+
+Open chatbot_data.json and add phrases under the correct intent's examples list. Add or edit prepared replies under responses. Keep each tag unique, use the same intent consistently, and provide enough examples for both training and testing. After changing the dataset, run the program again; the classifier trains from the JSON data at startup.
+
+## Limitations
+
+- The data is small and written for this project, so new wording may be misclassified.
+- Messages are classified independently; the chatbot does not keep conversation context.
+- Replies are selected from prepared text and are not generated by a language model.
+- Weather replies are static and do not use a live weather service.
+- Chat messages are not saved between runs.
 
 ## License
 
-No license file has been added yet.
+No license has been added. Ask the repository owner before reusing or redistributing this project.

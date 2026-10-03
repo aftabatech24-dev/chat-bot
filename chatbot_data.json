@@ -1,0 +1,180 @@
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "examples": [
+        "hello", "hi", "hey", "good morning", "good afternoon",
+        "hello there", "hi chatbot", "hey there", "nice to meet you", "howdy",
+        "greetings", "good evening", "a friendly hello", "hey chatbot", "welcome friend"
+      ],
+      "responses": [
+        "Hello! What would you like to talk about?",
+        "Hi there! How can I help?"
+      ]
+    },
+    {
+      "tag": "how_are_you",
+      "examples": [
+        "how are you", "how are you doing", "how is it going",
+        "are you doing well", "how do you feel", "what is up",
+        "how have you been", "are you okay today", "how are things",
+        "how is your day going", "how are you feeling", "how do you feel today",
+        "how are you today", "is everything going well", "how have things been"
+      ],
+      "responses": [
+        "I'm doing well, thanks for asking! How are you?",
+        "I'm ready to chat. How is your day going?"
+      ]
+    },
+    {
+      "tag": "happy",
+      "examples": [
+        "i am happy", "i feel great", "i am doing well", "today is wonderful",
+        "i am excited", "i feel good", "that made me happy", "i am cheerful",
+        "i am in a good mood", "things are going great", "i feel joyful",
+        "i am delighted", "i had a great day", "i feel cheerful today", "i am pleased"
+      ],
+      "responses": [
+        "That's great to hear! What made you feel happy?",
+        "Wonderful! I hope your good mood continues."
+      ]
+    },
+    {
+      "tag": "sad",
+      "examples": [
+        "i am sad", "i feel bad", "i am upset", "i had a bad day",
+        "i feel lonely", "i am worried", "i feel unhappy", "i am feeling down",
+        "today has been difficult", "i am disappointed", "i feel sad today",
+        "i am feeling unhappy", "i feel depressed today", "i am feeling miserable",
+        "i am having a rough day"
+      ],
+      "responses": [
+        "I'm sorry you're having a hard time. Want to tell me about it?",
+        "That sounds difficult. I'm here to listen."
+      ]
+    },
+    {
+      "tag": "thanks",
+      "examples": [
+        "thank you", "thanks", "thanks a lot", "that is helpful",
+        "i appreciate it", "thank you so much", "many thanks", "that helped me",
+        "you are helpful", "i am grateful", "thanks for helping me",
+        "thank you for explaining", "much appreciated", "i am thankful", "thanks for your help"
+      ],
+      "responses": ["You're welcome!", "Happy to help."]
+    },
+    {
+      "tag": "goodbye",
+      "examples": [
+        "goodbye", "bye", "see you later", "talk to you later",
+        "i have to go", "good night", "i am leaving now", "catch you later",
+        "farewell", "see you soon", "i should go now", "have a nice day",
+        "talk to you tomorrow", "goodbye for now", "take care"
+      ],
+      "responses": [
+        "Goodbye! Good luck with your work.",
+        "See you later. It was nice chatting with you!"
+      ]
+    },
+    {
+      "tag": "identity",
+      "examples": [
+        "who are you", "what is your name", "tell me about yourself",
+        "are you a chatbot", "what should i call you", "introduce yourself",
+        "what are you", "tell me your name", "can you introduce yourself",
+        "are you a human", "what is your bot name", "what is your identity",
+        "can you tell me about yourself", "what kind of bot are you", "are you a real person"
+      ],
+      "responses": [
+        "I'm ChatBot, a small Python chatbot that classifies conversation intents."
+      ]
+    },
+    {
+      "tag": "artificial_intelligence",
+      "examples": [
+        "what is ai", "what is artificial intelligence",
+        "explain artificial intelligence", "tell me about ai",
+        "how does ai work", "define ai", "what does ai mean",
+        "explain ai simply", "where is artificial intelligence used",
+        "what are examples of ai", "what does artificial intelligence mean",
+        "can you explain ai", "how is ai used", "what is an ai system",
+        "how can computers use ai"
+      ],
+      "responses": [
+        "Artificial intelligence (AI) is the field of making computers perform tasks that usually need human intelligence, such as understanding language or recognising patterns."
+      ]
+    },
+    {
+      "tag": "creator",
+      "examples": [
+        "who created you", "who made you", "who built you",
+        "who is your creator", "who programmed you", "who developed you",
+        "who wrote your code", "who designed you", "who is your developer",
+        "who made this chatbot", "who created this chatbot", "who coded this program",
+        "who is the programmer", "who is behind this bot", "who put you together"
+      ],
+      "responses": [
+        "I was created as a Python mini-project. A programmer wrote my training examples and code."
+      ]
+    },
+    {
+      "tag": "joke",
+      "examples": [
+        "tell me a joke", "make me laugh", "say something funny",
+        "do you know a joke", "i want to hear a joke", "joke please",
+        "can you tell a funny joke", "give me a joke", "make a funny comment",
+        "do something funny", "can you tell me a funny joke",
+        "tell me something amusing", "share a funny joke", "i need a laugh",
+        "give me something to laugh about"
+      ],
+      "responses": [
+        "Why did the computer go to the doctor? It had a virus!",
+        "Why was the Python programmer calm? They knew how to handle exceptions!"
+      ]
+    },
+    {
+      "tag": "study",
+      "examples": [
+        "help me study", "i have an exam", "i am learning python",
+        "give me study advice", "how can i learn programming",
+        "i need to focus on studying", "i want to revise my lessons",
+        "how do i prepare for an exam", "i need learning tips",
+        "help me plan my study time", "help me prepare for my test",
+        "i need to study", "how should i study", "give me programming study tips",
+        "i want to learn python"
+      ],
+      "responses": [
+        "Try studying in short sessions: choose one topic, practise it, then explain it aloud in your own words."
+      ]
+    },
+    {
+      "tag": "hobby",
+      "examples": [
+        "what do you like to do", "what are your hobbies", "what do you do for fun",
+        "do you have a hobby", "what do you enjoy", "tell me your interests",
+        "what activities do you like", "what is your favorite activity",
+        "what do you enjoy doing", "do you like learning",
+        "what do you enjoy doing for fun", "what is your favorite hobby",
+        "tell me about your hobbies", "how do you spend your free time",
+        "what do you like doing in your spare time"
+      ],
+      "responses": [
+        "I enjoy helping people learn and having friendly conversations."
+      ]
+    },
+    {
+      "tag": "weather",
+      "examples": [
+        "how is the weather", "what is the weather like", "is it raining",
+        "will it be sunny today", "tell me about the weather",
+        "is the weather warm", "will it rain tomorrow", "is it cloudy outside",
+        "what is today's forecast", "is it cold outside", "what is the weather today",
+        "how is the weather outside", "will it rain today", "tell me the forecast",
+        "what is the temperature outside"
+      ],
+      "responses": [
+        "I can't check live weather, but you can ask me about another topic!"
+      ]
+    }
+  ]
+}
